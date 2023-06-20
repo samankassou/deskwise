@@ -13,8 +13,8 @@ class Equipment extends Model
     /**
      * Get the sub type of the equipment.
      */
-    public function subType(): BelongsTo
+    public function type(): BelongsTo
     {
-        return $this->belongsTo(SubType::class);
+        return $this->belongsTo(Type::class);
     }
 }
