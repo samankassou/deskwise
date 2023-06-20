@@ -17,6 +17,7 @@ yarn-error.log
 /.fleet
 /.idea
 .fly/*
+fly.toml
 
 # Logs
 logs
