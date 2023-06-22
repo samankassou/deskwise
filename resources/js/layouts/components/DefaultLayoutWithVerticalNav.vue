@@ -43,6 +43,20 @@ const vuetifyTheme = useTheme()
       />
       <VerticalNavLink
         :item="{
+          title: 'Equipments types',
+          icon: 'mdi-account-cog-outline',
+          to: '/types',
+        }"
+      />
+      <VerticalNavLink
+        :item="{
+          title: 'Equipments',
+          icon: 'mdi-account-cog-outline',
+          to: '/equipments',
+        }"
+      />
+      <VerticalNavLink
+        :item="{
           title: 'Account Settings',
           icon: 'mdi-account-cog-outline',
           to: '/account-settings',
