@@ -1,16 +1,23 @@
 <script setup>
-import DemoSimpleTableBasics from '@/views/pages/tables/DemoSimpleTableBasics.vue'
-import DemoSimpleTableDensity from '@/views/pages/tables/DemoSimpleTableDensity.vue'
-import DemoSimpleTableFixedHeader from '@/views/pages/tables/DemoSimpleTableFixedHeader.vue'
-import DemoSimpleTableHeight from '@/views/pages/tables/DemoSimpleTableHeight.vue'
-import DemoSimpleTableTheme from '@/views/pages/tables/DemoSimpleTableTheme.vue'
+import { ref } from "vue";
+import axios from "@axios";
+import EquipmentsTypesTable from "@/views/pages/equipments-types/EquipmentsTypesTable.vue";
+
+const types = ref([]);
+
+const GetTypes = async () => {
+  await axios.get("types").then((response) => {
+    types.value = response.data.data;
+  });
+};
+GetTypes();
 </script>
 
 <template>
   <VRow>
     <VCol cols="12">
-      <VCard title="Basic">
-        <DemoSimpleTableBasics />
+      <VCard title="Equipments types">
+        <EquipmentsTypesTable :equipments-types="types" />
       </VCard>
     </VCol>
   </VRow>
