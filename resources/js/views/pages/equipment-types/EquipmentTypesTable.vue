@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps(["equipmentsTypes"]);
+const props = defineProps(["equipmentTypes"]);
 </script>
 
 <template>
@@ -13,7 +13,7 @@ const props = defineProps(["equipmentsTypes"]);
     </thead>
 
     <tbody>
-      <tr v-for="type in equipmentsTypes" :key="type.id">
+      <tr v-for="type in equipmentTypes" :key="type.id">
         <td>
           {{ type.id }}
         </td>

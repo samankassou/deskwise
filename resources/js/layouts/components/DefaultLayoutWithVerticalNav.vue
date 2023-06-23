@@ -1,16 +1,15 @@
 <script setup>
-import { useTheme } from 'vuetify'
-import VerticalNavSectionTitle from '@/@layouts/components/VerticalNavSectionTitle.vue'
-import VerticalNavLayout from '@layouts/components/VerticalNavLayout.vue'
-import VerticalNavLink from '@layouts/components/VerticalNavLink.vue'
+import { useTheme } from "vuetify";
+import VerticalNavSectionTitle from "@/@layouts/components/VerticalNavSectionTitle.vue";
+import VerticalNavLayout from "@layouts/components/VerticalNavLayout.vue";
+import VerticalNavLink from "@layouts/components/VerticalNavLink.vue";
 
 // Components
-import Footer from '@/layouts/components/Footer.vue'
-import NavbarThemeSwitcher from '@/layouts/components/NavbarThemeSwitcher.vue'
-import UserProfile from '@/layouts/components/UserProfile.vue'
+import Footer from "@/layouts/components/Footer.vue";
+import NavbarThemeSwitcher from "@/layouts/components/NavbarThemeSwitcher.vue";
+import UserProfile from "@/layouts/components/UserProfile.vue";
 
-const vuetifyTheme = useTheme()
-
+const vuetifyTheme = useTheme();
 </script>
 
 <template>
@@ -43,16 +42,16 @@ const vuetifyTheme = useTheme()
       />
       <VerticalNavLink
         :item="{
-          title: 'Equipments types',
+          title: 'Equipments',
           icon: 'mdi-account-cog-outline',
-          to: '/types',
+          to: '/equipments',
         }"
       />
       <VerticalNavLink
         :item="{
-          title: 'Equipments',
+          title: 'Equipment types',
           icon: 'mdi-account-cog-outline',
-          to: '/equipments',
+          to: '/equipment-types',
         }"
       />
       <VerticalNavLink
