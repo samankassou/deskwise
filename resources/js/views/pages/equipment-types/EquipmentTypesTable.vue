@@ -13,15 +13,15 @@ const props = defineProps(["equipmentTypes"]);
     </thead>
 
     <tbody>
-      <tr v-for="type in equipmentTypes" :key="type.id">
+      <tr v-for="equipmentType in equipmentTypes" :key="type.id">
         <td>
-          {{ type.id }}
+          {{ equipmentType.id }}
         </td>
         <td class="text-center">
-          {{ type.name }}
+          {{ equipmentType.name }}
         </td>
         <td class="text-center">
-          {{ type.slug }}
+          {{ equipmentType.slug }}
         </td>
       </tr>
     </tbody>
