@@ -13,7 +13,11 @@ const props = defineProps(["equipmentTypes"]);
     </thead>
 
     <tbody>
+<<<<<<< HEAD:resources/js/views/pages/equipment-types/EquipmentTypesTable.vue
       <tr v-for="equipmentType in equipmentTypes" :key="type.id">
+=======
+      <tr v-for="type in equipmentTypes" :key="type.id">
+>>>>>>> 2f5ee13733f41555965ae7318aaaca9bce58d84e:resources/js/views/pages/equipments-types/EquipmentsTypesTable.vue
         <td>
           {{ equipmentType.id }}
         </td>

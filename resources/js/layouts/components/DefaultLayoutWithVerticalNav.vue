@@ -44,7 +44,11 @@ const vuetifyTheme = useTheme();
         :item="{
           title: 'Equipments',
           icon: 'mdi-account-cog-outline',
+<<<<<<< HEAD
           to: '/equipments',
+=======
+          to: '/equipment-types',
+>>>>>>> 2f5ee13733f41555965ae7318aaaca9bce58d84e
         }"
       />
       <VerticalNavLink
