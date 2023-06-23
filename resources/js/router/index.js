@@ -17,8 +17,8 @@ const router = createRouter({
           component: () => import('../pages/account-settings.vue'),
         },
         {
-          path: 'types',
-          component: () => import('../pages/types.vue'),
+          path: 'equipment-types',
+          component: () => import('../pages/equipment-types.vue'),
         },
         {
           path: 'equipments',
