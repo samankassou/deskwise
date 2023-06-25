@@ -1,7 +1,7 @@
 <script setup>
-import { ref } from "vue";
-import axios from "@axios";
 import EquipmentTypesTable from "@/views/pages/equipment-types/EquipmentTypesTable.vue";
+import axios from "@axios";
+import { ref } from "vue";
 
 const equipmentTypes = ref([]);
 
@@ -17,7 +17,7 @@ GetEquipmentTypes();
   <VRow>
     <VCol cols="12">
       <VCard title="Equipments types">
-        <EquipmentTypesTable :equipment-types="equipmentTypes" />
+        <EquipmentTypesTable />
       </VCard>
     </VCol>
   </VRow>
