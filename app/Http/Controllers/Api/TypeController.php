@@ -5,15 +5,20 @@ namespace App\Http\Controllers\Api;
 use App\Models\Type;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class TypeController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        $types = Type::all(['id', 'name', 'slug']);
+        $types = QueryBuilder::for(Type::class)
+            ->allowedFilters(['name'])
+            ->allowedSorts('name')
+            ->paginate($request->get('perPage', 15));
+
         return $this->sendResponse($types, 'Equipments types retrieved succesfully!');
     }
 
@@ -40,7 +45,7 @@ class TypeController extends BaseController
      */
     public function update(Request $request, Type $type)
     {
-        $validatedData = $request->validate(['name' => 'required|unique:types,name,'.$type->id]);
+        $validatedData = $request->validate(['name' => 'required|unique:types,name,' . $type->id]);
         $type->update($validatedData);
         return response()->json($type);
     }
