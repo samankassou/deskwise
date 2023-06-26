@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Models\Type;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Spatie\QueryBuilder\QueryBuilder;
 
 class TypeController extends BaseController
 {
@@ -14,10 +13,7 @@ class TypeController extends BaseController
      */
     public function index(Request $request): JsonResponse
     {
-        $types = QueryBuilder::for(Type::class)
-            ->allowedFilters(['name'])
-            ->allowedSorts('name')
-            ->paginate($request->get('perPage', 15));
+        $types = Type::all();
 
         return $this->sendResponse($types, 'Equipments types retrieved succesfully!');
     }

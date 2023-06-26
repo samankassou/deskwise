@@ -3,29 +3,12 @@ import axios from "@axios";
 import "ag-grid-community/styles/ag-grid.css"; // Core grid CSS, always needed
 import "ag-grid-community/styles/ag-theme-alpine.css"; // Optional theme CSS
 import { AgGridVue } from "ag-grid-vue3"; // the AG Grid Vue Component
-import { onMounted, reactive, ref } from "vue";
+import { reactive, ref } from "vue";
 
-// Use it!
-//toast("I'm a toast!");
 // definitions
 const gridApi = ref(null); // for accessing Grid's API
 const gridColumnApi = ref(null); // for accessing Grid's API
-const rowBuffer = ref(null);
-const rowSelection = ref(null);
-const rowModelType = ref(null);
-const cacheBlockSize = ref(null);
-const cacheOverflowSize = ref(null);
-const maxConcurrentDatasourceRequests = ref(null);
-const infiniteInitialRowCount = ref(null);
-const maxBlocksInCache = ref(null);
-const equipmentTypesData = reactive({});
-rowBuffer.value = 0;
-rowSelection.value = "multiple";
-rowModelType.value = "infinite";
-cacheBlockSize.value = 20;
-cacheOverflowSize.value = 2;
-maxConcurrentDatasourceRequests.value = 1;
-maxBlocksInCache.value = 10;
+const equipmentTypes = reactive({});
 // Each Column Definition results in one Column.
 const columnDefs = reactive({
   value: [
@@ -56,35 +39,19 @@ const defaultColDef = {
   filter: true,
   flex: 1,
 };
-// building datasource
-const dataSource = {
-  rowCount: undefined,
-  getRows: (params) => {
-    console.log("asking for " + params.startRow + " to " + params.endRow);
-    console.log(params);
-    // At this point in your code, you would call the server.
-    axios.get("equipment-types").then((response) => {
-      //equipmentTypesData.value = response.data.data.data;
-      console.log(response.data.data);
-      params.successCallback(response.data.data.data, response.data.data.to);
-    });
-  },
-};
-
 // Obtain API from grid's onGridReady event
 const onGridReady = (params) => {
   gridApi.value = params.api;
   gridColumnApi.value = params.columnApi;
-  params.api.setDatasource(dataSource);
 };
 const cellWasClicked = (event) => {
   // consuming Grid Event
   console.log("cell was clicked", event);
 };
-const fetchEquipmentTypesData = async () => {
+const fetchEquipmentTypes = async () => {
   try {
     await axios.get("equipment-types").then((response) => {
-      equipmentTypesData.value = response.data.data.data;
+      equipmentTypes.value = response.data.data;
     });
   } catch (error) {
     console.error(error);
@@ -92,7 +59,7 @@ const fetchEquipmentTypesData = async () => {
 };
 // load data from server
 onMounted(() => {
-  fetchEquipmentTypesData();
+  fetchEquipmentTypes();
 });
 </script>
 
@@ -102,15 +69,9 @@ onMounted(() => {
     style="height: 400px"
     :columnDefs="columnDefs.value"
     :defaultColDef="defaultColDef"
-    :rowBuffer="rowBuffer"
-    :rowSelection="rowSelection"
-    :rowModelType="rowModelType"
-    :cacheBlockSize="cacheBlockSize"
-    :cacheOverflowSize="cacheOverflowSize"
-    :maxConcurrentDatasourceRequests="maxConcurrentDatasourceRequests"
-    :infiniteInitialRowCount="infiniteInitialRowCount"
-    :maxBlocksInCache="maxBlocksInCache"
+    :rowData="equipmentTypes.value"
     animateRows="true"
+    pagination="true"
     @cell-clicked="cellWasClicked"
     @grid-ready="onGridReady"
   >
