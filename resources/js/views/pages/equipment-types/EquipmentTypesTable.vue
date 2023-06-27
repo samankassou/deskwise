@@ -12,7 +12,7 @@ const serverOptions = ref({
   page: 1,
   rowsPerPage: 2,
   sortBy: "name",
-  sortType: "desc",
+  sortType: "asc",
 });
 
 const loadFromServer = async () => {

@@ -13,10 +13,6 @@ const router = createRouter({
           component: () => import('../pages/dashboard.vue'),
         },
         {
-          path: 'demo',
-          component: () => import('../pages/vue3-easy-data-table.vue'),
-        },
-        {
           path: 'account-settings',
           component: () => import('../pages/account-settings.vue'),
         },

@@ -12,7 +12,7 @@ const dialog = ref(false);
           <template v-slot:activator="{ props }">
             <VBtn color="primary mx-5" v-bind="props"> Create </VBtn>
           </template>
-          <CreateEquipmentTypeForm />
+          <CreateEquipmentTypeForm @close-dialog="dialog = false" />
         </VDialog>
         <EquipmentTypesTable />
       </VCard>
