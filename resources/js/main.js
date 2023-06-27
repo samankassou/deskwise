@@ -9,7 +9,8 @@ import '@layouts/styles/index.scss'
 import '@styles/styles.scss'
 import { createPinia } from 'pinia'
 import { createApp } from 'vue'
-import "vue-toastification/dist/index.css"
+import Vue3EasyDataTable from 'vue3-easy-data-table'
+import 'vue3-easy-data-table/dist/style.css'
 
 loadFonts()
 
@@ -22,6 +23,9 @@ const app = createApp(App)
 app.use(vuetify)
 app.use(createPinia())
 app.use(router)
+
+// Components
+app.component('EasyDataTable', Vue3EasyDataTable);
 
 // Mount vue app
 app.mount('#app')

@@ -1,79 +1,60 @@
 <script setup>
 import axios from "@axios";
-import "ag-grid-community/styles/ag-grid.css"; // Core grid CSS, always needed
-import "ag-grid-community/styles/ag-theme-alpine.css"; // Optional theme CSS
-import { AgGridVue } from "ag-grid-vue3"; // the AG Grid Vue Component
-import { reactive, ref } from "vue";
-
-// definitions
-const gridApi = ref(null); // for accessing Grid's API
-const gridColumnApi = ref(null); // for accessing Grid's API
-const equipmentTypes = reactive({});
-// Each Column Definition results in one Column.
-const columnDefs = reactive({
-  value: [
-    {
-      headerName: "ID",
-      maxWidth: 100,
-      field: "id",
-      cellRenderer: (params) => {
-        if (params.value !== undefined) {
-          return params.value;
-        } else {
-          return '<img src="https://www.ag-grid.com/example-assets/loading.gif">';
-        }
-      },
-    },
-    {
-      headerName: "Name",
-      field: "name",
-      sortable: true,
-      filter: true,
-    },
-    { field: "slug" },
-  ],
+const headers = ref([
+  { text: "ID", value: "id" },
+  { text: "NAME", value: "name", sortable: true },
+  { text: "SLUG", value: "slug" },
+]);
+const items = ref([]);
+const loading = ref(false);
+const serverItemsLength = ref(0);
+const serverOptions = ref({
+  page: 1,
+  rowsPerPage: 2,
+  sortBy: "name",
+  sortType: "desc",
 });
-// DefaultColDef sets props common to all Columns
-const defaultColDef = {
-  sortable: true,
-  filter: true,
-  flex: 1,
-};
-// Obtain API from grid's onGridReady event
-const onGridReady = (params) => {
-  gridApi.value = params.api;
-  gridColumnApi.value = params.columnApi;
-};
-const cellWasClicked = (event) => {
-  // consuming Grid Event
-  console.log("cell was clicked", event);
-};
-const fetchEquipmentTypes = async () => {
+
+const loadFromServer = async () => {
+  loading.value = true;
   try {
-    await axios.get("equipment-types").then((response) => {
-      equipmentTypes.value = response.data.data;
+    await axios.get("equipment-types", serverOptions).then((response) => {
+      let responseData = response.data;
+      items.value = responseData.data;
+      serverItemsLength.value = responseData.total;
     });
   } catch (error) {
     console.error(error);
+  } finally {
+    loading.value = false;
   }
 };
-// load data from server
-onMounted(() => {
-  fetchEquipmentTypes();
-});
+
+// initial load
+loadFromServer();
+
+watch(
+  serverOptions,
+  () => {
+    loadFromServer();
+  },
+  { deep: true }
+);
 </script>
 
 <template>
-  <AgGridVue
-    class="ag-theme-alpine px-5 py-5"
-    style="height: 400px"
-    :columnDefs="columnDefs.value"
-    :defaultColDef="defaultColDef"
-    :rowData="equipmentTypes.value"
-    animateRows="true"
-    pagination="true"
-    @cell-clicked="cellWasClicked"
-    @grid-ready="onGridReady"
-  >
-  </AgGridVue>
+  <VRow class="px-5 py-5">
+    <VCol cols="12">
+      <EasyDataTable
+        v-model:server-options="serverOptions"
+        :server-items-length="serverItemsLength"
+        :loading="loading"
+        :headers="headers"
+        :items="items"
+        :sort-by="serverOptions.sortBy"
+        :sort-type="serverOptions.sortType"
+        buttons-pagination
+      />
+    </VCol>
+  </VRow>
 </template>
