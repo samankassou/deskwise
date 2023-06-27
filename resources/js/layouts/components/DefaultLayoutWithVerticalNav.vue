@@ -1,8 +1,7 @@
 <script setup>
-import { useTheme } from "vuetify";
-import VerticalNavSectionTitle from "@/@layouts/components/VerticalNavSectionTitle.vue";
 import VerticalNavLayout from "@layouts/components/VerticalNavLayout.vue";
 import VerticalNavLink from "@layouts/components/VerticalNavLink.vue";
+import { useTheme } from "vuetify";
 
 // Components
 import Footer from "@/layouts/components/Footer.vue";
@@ -42,15 +41,22 @@ const vuetifyTheme = useTheme();
       />
       <VerticalNavLink
         :item="{
-          title: 'Equipments',
-          icon: 'mdi-account-cog-outline',
+          title: 'Incoming/outgoing',
+          icon: 'mdi-store-cog-outline',
+          to: '/equipments',
+        }"
+      />
+      <VerticalNavLink
+        :item="{
+          title: 'Employees',
+          icon: 'mdi-account-group-outline',
           to: '/equipments',
         }"
       />
       <VerticalNavLink
         :item="{
           title: 'Equipment types',
-          icon: 'mdi-account-cog-outline',
+          icon: 'mdi-account-hard-hat-outline',
           to: '/equipment-types',
         }"
       />
