@@ -31,27 +31,27 @@ class TypeController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(Type $type)
+    public function show(Type $equipment_type)
     {
-        return response()->json($type);
+        return response()->json($equipment_type);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Type $type)
+    public function update(Request $request, Type $equipment_type)
     {
-        $validatedData = $request->validate(['name' => 'required|unique:types,name,' . $type->id]);
-        $type->update($validatedData);
-        return response()->json($type);
+        $validatedData = $request->validate(['name' => 'required|unique:types,name,' . $equipment_typetype->id]);
+        $equipment_type->update($validatedData);
+        return response()->json($equipment_type);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Type $type)
+    public function destroy(Type $equipment_type)
     {
-        $type->delete();
-        return response()->json([]);
+        $equipment_type->delete();
+        return response()->json($equipment_type);
     }
 }

@@ -1,4 +1,5 @@
 <script setup>
+defineEmits(["deleteEquipmentType"]);
 defineProps({
   equipmentTypes: Array,
   loading: Boolean,
@@ -22,7 +23,11 @@ const headers = ref([
         buttons-pagination
       >
         <template #item-actions="{ id }">
-          <span>{{ id }}</span>
+          <VBtn
+            icon="mdi-delete-outline"
+            @click="$emit('deleteEquipmentType', id)"
+            variant="text"
+          />
         </template>
       </EasyDataTable>
     </VCol>
