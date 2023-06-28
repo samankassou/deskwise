@@ -1,6 +1,6 @@
 <script setup>
 import axios from "@axios";
-defineEmits(["typeAdded", "closeDialog"]);
+const emit = defineEmits(["typeAdded", "closeDialog"]);
 const Name = ref("");
 const loading = ref(false);
 const errorMessage = ref("");
@@ -11,8 +11,8 @@ const submitForm = async () => {
     await axios
       .post("equipment-types", { name: Name.value })
       .then((response) => {
+        console.log(response);
         emit("closeDialog");
-        //console.log(response);
       });
   } catch (error) {
     errorMessage.value = error?.response?.data?.message;
