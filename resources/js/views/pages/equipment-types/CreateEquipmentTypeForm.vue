@@ -12,7 +12,7 @@ const submitForm = async () => {
       .post("equipment-types", { name: Name.value })
       .then((response) => {
         console.log(response);
-        emit("closeDialog");
+        emit("typeAdded");
       });
   } catch (error) {
     errorMessage.value = error?.response?.data?.message;

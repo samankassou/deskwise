@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Models\Type;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Spatie\QueryBuilder\QueryBuilder;
 
 class TypeController extends BaseController
 {
@@ -14,14 +13,7 @@ class TypeController extends BaseController
      */
     public function index(Request $request): JsonResponse
     {
-        $sort = $request->sortBy == "desc" ? "-" . $request->sortBy : $request->sortBy;
-        $types = QueryBuilder::for(Type::class)
-            ->allowedFields(['id', 'name', 'slug'])
-            ->defaultSort('name')
-            ->allowedFilters(['name'])
-            ->allowedSorts($sort)
-            ->paginate($request->get('rowsPerPage', 10))
-            ->appends(request()->query());
+        $types = Type::all(['id', 'name', 'slug']);
 
         return response()->json($types);
     }
