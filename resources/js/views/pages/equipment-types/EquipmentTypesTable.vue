@@ -1,5 +1,5 @@
 <script setup>
-defineEmits(["deleteEquipmentType"]);
+defineEmits(["deleteEquipmentType", "editEquipmentType"]);
 defineProps({
   equipmentTypes: Array,
   loading: Boolean,
@@ -23,6 +23,11 @@ const headers = ref([
         buttons-pagination
       >
         <template #item-actions="{ id }">
+          <VBtn
+            icon="mdi-pencil-outline"
+            @click="$emit('editEquipmentType', id)"
+            variant="text"
+          />
           <VBtn
             icon="mdi-delete-outline"
             @click="$emit('deleteEquipmentType', id)"

@@ -41,7 +41,7 @@ class TypeController extends BaseController
      */
     public function update(Request $request, Type $equipment_type)
     {
-        $validatedData = $request->validate(['name' => 'required|unique:types,name,' . $equipment_typetype->id]);
+        $validatedData = $request->validate(['name' => 'required|unique:types,name,' . $equipment_type->id]);
         $equipment_type->update($validatedData);
         return response()->json($equipment_type);
     }

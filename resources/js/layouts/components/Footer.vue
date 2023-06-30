@@ -5,18 +5,15 @@
       &copy;
       {{ new Date().getFullYear() }}
       Made With
-      <VIcon
-        icon="bx-heart"
-        color="error"
-        size="1.25rem"
-        class="mx-1"
-      />
-      By <a
+      <VIcon icon="bx-heart" color="error" size="1.25rem" class="mx-1" />
+      By
+      <a
         href="#"
         target="_blank"
         rel="noopener noreferrer"
         class="text-primary ms-1"
-      >Foulla</a>
+        >Gelande</a
+      >
     </span>
   </div>
 </template>

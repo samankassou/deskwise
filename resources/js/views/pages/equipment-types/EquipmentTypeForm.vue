@@ -1,25 +1,61 @@
 <script setup>
 import axios from "@axios";
-const emit = defineEmits(["typeAdded", "closeDialog"]);
+const props = defineProps(["currentId", "dialogMode"]);
+const emit = defineEmits(["typeAdded", "closeDialog", "typeUpdated"]);
 const Name = ref("");
 const loading = ref(false);
 const errorMessage = ref("");
-const submitForm = async () => {
+const submitBtnTxt = computed(() => {
+  return props.dialogMode == "create" ? "Create" : "Update";
+});
+const getEquipmentType = async () => {
+  if (props.currentId == null) {
+    return;
+  }
   loading.value = true;
-
   try {
-    await axios
-      .post("equipment-types", { name: Name.value })
-      .then((response) => {
-        console.log(response);
-        emit("typeAdded");
-      });
+    await axios.get("equipment-types/" + props.currentId).then((response) => {
+      Name.value = response.data?.name;
+    });
   } catch (error) {
     errorMessage.value = error?.response?.data?.message;
   } finally {
     loading.value = false;
   }
 };
+const submitForm = async () => {
+  loading.value = true;
+  // creation
+  if (props.dialogMode == "create") {
+    try {
+      await axios
+        .post("equipment-types", { name: Name.value })
+        .then((response) => {
+          console.log(response);
+          emit("typeAdded");
+        });
+    } catch (error) {
+      errorMessage.value = error?.response?.data?.message;
+    } finally {
+      loading.value = false;
+    }
+  } else {
+    // update
+    try {
+      await axios
+        .put("equipment-types/" + props.currentId, { name: Name.value })
+        .then((response) => {
+          console.log(response);
+          emit("typeUpdated");
+        });
+    } catch (error) {
+      errorMessage.value = error?.response?.data?.message;
+    } finally {
+      loading.value = false;
+    }
+  }
+};
+getEquipmentType();
 </script>
 
 <template>
@@ -49,7 +85,7 @@ const submitForm = async () => {
 
         <!-- 👉 submit and reset button -->
         <VCol offset-md="3" cols="12" md="9" class="d-flex gap-4">
-          <VBtn type="submit" :loading="loading">Create</VBtn>
+          <VBtn type="submit" :loading="loading">{{ submitBtnTxt }}</VBtn>
           <VBtn
             color="secondary"
             variant="tonal"
