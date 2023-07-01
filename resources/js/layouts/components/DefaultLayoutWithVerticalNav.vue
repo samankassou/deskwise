@@ -1,14 +1,12 @@
 <script setup>
+import VerticalNavSectionTitle from "@/@layouts/components/VerticalNavSectionTitle.vue";
 import VerticalNavLayout from "@layouts/components/VerticalNavLayout.vue";
 import VerticalNavLink from "@layouts/components/VerticalNavLink.vue";
-import { useTheme } from "vuetify";
 
 // Components
 import Footer from "@/layouts/components/Footer.vue";
 import NavbarThemeSwitcher from "@/layouts/components/NavbarThemeSwitcher.vue";
 import UserProfile from "@/layouts/components/UserProfile.vue";
-
-const vuetifyTheme = useTheme();
 </script>
 
 <template>
@@ -60,6 +58,12 @@ const vuetifyTheme = useTheme();
           to: '/equipment-types',
         }"
       />
+      <!-- 👉 Company -->
+      <VerticalNavSectionTitle
+        :item="{
+          heading: 'Company',
+        }"
+      />
       <VerticalNavLink
         :item="{
           title: 'Directions',
@@ -79,6 +83,12 @@ const vuetifyTheme = useTheme();
           title: 'Services',
           icon: 'mdi-account-hard-hat-outline',
           to: '/services',
+        }"
+      />
+      <!-- 👉 Account -->
+      <VerticalNavSectionTitle
+        :item="{
+          heading: 'Account',
         }"
       />
       <VerticalNavLink
