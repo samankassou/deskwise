@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\DepartmentController;
 use App\Http\Controllers\Api\DirectionController;
 use App\Http\Controllers\Api\TypeController;
 use Illuminate\Http\Request;
@@ -21,3 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::apiResource('equipment-types', TypeController::class);
 Route::apiResource('directions', DirectionController::class);
+Route::apiResource('departments', DepartmentController::class);

@@ -24,6 +24,10 @@ const router = createRouter({
           path: 'directions',
           component: () => import('../pages/directions.vue'),
         },
+        {
+          path: 'departments',
+          component: () => import('../pages/departments.vue'),
+        },
       ],
     },
     {
