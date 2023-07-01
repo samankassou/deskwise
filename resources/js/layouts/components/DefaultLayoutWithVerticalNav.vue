@@ -62,6 +62,27 @@ const vuetifyTheme = useTheme();
       />
       <VerticalNavLink
         :item="{
+          title: 'Directions',
+          icon: 'mdi-account-hard-hat-outline',
+          to: '/directions',
+        }"
+      />
+      <VerticalNavLink
+        :item="{
+          title: 'Departments',
+          icon: 'mdi-account-hard-hat-outline',
+          to: '/departments',
+        }"
+      />
+      <VerticalNavLink
+        :item="{
+          title: 'Services',
+          icon: 'mdi-account-hard-hat-outline',
+          to: '/services',
+        }"
+      />
+      <VerticalNavLink
+        :item="{
           title: 'Account Settings',
           icon: 'mdi-account-cog-outline',
           to: '/account-settings',

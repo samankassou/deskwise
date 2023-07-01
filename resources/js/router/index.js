@@ -20,6 +20,10 @@ const router = createRouter({
           path: 'equipment-types',
           component: () => import('../pages/equipment-types.vue'),
         },
+        {
+          path: 'directions',
+          component: () => import('../pages/directions.vue'),
+        },
       ],
     },
     {
